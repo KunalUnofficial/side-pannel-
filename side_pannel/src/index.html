@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Side-Pannel</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="main">
+      <div class="header">
+        <div class="logo"><img src="https://m.media-amazon.com/images/M/MV5BNzg1MDQxMTQ2OF5BMl5BanBnXkFtZTcwMTk3MjAzOQ@@._V1_.jpg"  alt="logo"></div>
+        <nav>
+         <span>Home</span><span>About</span><span>Contact</span><span>None</span>
+        </nav>
+      </div>
+      <div class="middle" >
+        <div class="side-pannel">
+          <button id="open-btn" onclick="openSidePannel()">Open</button>
+          <button id="close-btn" onclick="closeSidePannel()">Close</button>
+          <p class="text">This this where the side panel suppose to be</p>
+          <div class="red"></div>
+          <div class="blue"></div>
+          <div class="green"></div>
+          <div class="yellow"></div>
+        </div>   
+        <div style="width: 50%; height: 50%; position: absolute; background-color: beige; left: 7rem;">
+
+        </div>   
+      </div>
+      <div>footer</div>
+    </div>
+    <script >
+    const sidePannel = document.querySelector(".side-pannel"); 
+const openBtn = document.getElementById("open-btn");    
+const closeBtn = document.getElementById("close-btn");  
+const text = document.querySelector(".text");
+const divSet = document.querySelectorAll(".red, .yellow, .blue, .green")// this creates a node list of nodes that refering to each html elements
+console.log(divSet)
+
+openBtn.addEventListener('click', function(e){
+
+e.preventDefault(); 
+sidePannel.classList.add("open");
+openBtn.style.display = "none"; 
+closeBtn.removeAttribute("id")
+closeBtn.classList.add("show-cls-btn")
+
+text.classList.add("show")
+Array.from(divSet).forEach(node => {
+  console.log(node); 
+  node.style.transition = "margin-left 1s"
+  node.style.marginLeft = "10rem"
+})
+})
+closeBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  sidePannel.classList.remove("open")
+  closeBtn.classList.remove("show-cls-btn");
+  closeBtn.setAttribute("id", "close-btn")
+  text.classList.remove("show");
+  openBtn.style.display = "inline-block"; 
+  Array.from(divSet).forEach(node =>{
+    node.style.marginLeft = "0rem"
+  })
+})
+      /*
+      
+      The things that are needed to make a side pannel -> 
+      1st need to decide in which way it should be done : a) writing different css defining different states and using javaScript for adding and removing classes with and from an existing class
+                                                          procedure -> <div class="first-class"></div> and the css -> .first-class{ define the default needful css} then by using javaScript -> element.classList.add("only the newly added class") -> the newly added class in css be like -> .first-class.newly-added-class{}
+                                                          somethings to remember while setting such classes never put space in between the existing one and the newer one. never use cammel casing inside css stylesheet for defining css properties nor even write a class in that way. never use open() or close() in javaScript for creating a function causse these keywords are already reserved. 
+      
+                                                          b) Only using javaScript for writing the styles and setting them as needed. 
+      
+        The Crucial CSS Properties : z-index -> which keeps the set html node on the top of the other 
+                                      margin or positioning properties ; 
+                                      transition property -> transition : duration delay property time-function  <- this is the format that to be set to first-class of that element 
+      
+      */
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
